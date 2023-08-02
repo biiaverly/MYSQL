@@ -1,4 +1,4 @@
-# $${\color{darkblue}Introduction}$$
+# $${\color{greem}Introduction}$$
 
 ## 1. What is a Database?
 
@@ -55,7 +55,7 @@ A database is a structured collection of data organized using a hierarchical mod
 The structure of a database is determined by the relationship between these components, and the schema provides the blueprint for how data should be stored, organized, and accessed within the database system. Databases can be further categorized into different types based on their models, such as relational databases (like MySQL), NoSQL databases, and more, each with its own specific structure and characteristics.
 
 
-# $${\color{darkblue}MYSQL}$$
+# $${\color{green}MYSQL}$$
 
 # Introduction to MySQL
 
