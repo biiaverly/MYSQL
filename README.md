@@ -54,6 +54,56 @@ A database is a structured collection of data organized using a hierarchical mod
 
 The structure of a database is determined by the relationship between these components, and the schema provides the blueprint for how data should be stored, organized, and accessed within the database system. Databases can be further categorized into different types based on their models, such as relational databases (like MySQL), NoSQL databases, and more, each with its own specific structure and characteristics.
 
+# $${\color{green}Installation}$$
+## How to Set Up a MySQL Container and Execute a SQL File
+
+### Prerequisites
+
+Ensure that Docker is installed on your machine. If you haven't installed it yet, follow the official Docker installation guide for your operating system.
+
+### Configuration
+
+**Step-by-Step Instructions**
+
+**Clone the Repository**:
+   Clone the project repository to your local machine using the git clone command.
+
+**Navigate to the Project Directory**:
+   Open your terminal or command prompt and navigate to the root of the cloned project.
+
+**Start the MySQL Container**:
+
+   To start the MySQL container, use Docker Compose. Run the following command in your terminal:
+
+
+```
+docker-compose up -d
+```
+This command will create and run the MySQL container in the background using the configurations defined in the docker-compose.yaml file.
+
+**Verify Container Status:**
+
+To check if the container is running, execute the following command:
+
+
+```docker ps```
+
+Ensure that the MySQL container is listed and the necessary ports (e.g., 3306 and 3301) are properly mapped.
+
+**Execute the SQL File:**
+
+With the MySQL container up and running, you can execute the primeiro.sql file. Use the following command to run the SQL file inside the container:
+
+
+
+```docker exec -i bia_database mysql -u root -p root < src/FILE_NAME.sql```
+
+
+**Check the Database:**
+
+To verify that the SQL file executed successfully and the data was inserted, access the MySQL terminal inside the container by running:
+
+``` docker exec -it bia_database mysql -u root -p ```
 
 # $${\color{green}MYSQL}$$
 
@@ -87,17 +137,13 @@ MySQL is a popular open-source Relational Database Management System (RDBMS) use
 
 Open a terminal (Ctrl + Alt + T) and update the package list to ensure you have the latest information about available packages:
 
-``` 
-sudo apt update
-```
+```sudo apt update```
 
 ### Step 2: Install MySQL Server
 
 To install the MySQL server, use the following command:
 
-``` 
-sudo apt install mysql-server
-```
+``` sudo apt install mysql-server```
 
 During the installation, you will be prompted to set a password for the MySQL root user. Choose a strong password and remember it, as you will need it later for administrative tasks.
 
@@ -105,17 +151,13 @@ During the installation, you will be prompted to set a password for the MySQL ro
 
 Start the MySQL service and enable it to start automatically at system boot:
 
-``` 
-sudo systemctl start mysql
-sudo systemctl enable mysql
-```
+```sudo systemctl start mysql``` 
+```sudo systemctl enable mysql ```
 
 ## Step 4: Check MySQL Status
 
 Verify that MySQL is running:
-``` 
-sudo systemctl status mysql
-```
+```sudo systemctl status mysql```
 
 If everything is set up correctly, you should see "active (running)" in the output.
 
@@ -151,7 +193,7 @@ In MySQL, the "CREATE DATABASE" command is used to create a new database within 
 The syntax for creating a new database in MySQL is as follows:
 
 ```sql
-CREATE DATABASE database_name;
+CREATE DATABASE test;
 ```
 To verify that the database was successfully created, you can use the following command to show a list of all databases in the MySQL server:
 
@@ -159,3 +201,177 @@ To verify that the database was successfully created, you can use the following 
 SHOW DATABASES;
 ```
 This command will display a list of all databases, including the one you just created.
+```
+mysql> show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+```
+### Select Database
+
+In MySQL, the `USE` statement is used to select a specific database within the MySQL server. Once a database is selected using the `USE` statement, any subsequent SQL queries will be executed in the context of that database.
+
+#### Syntax
+
+The syntax for using the `USE` statement is as follows:
+
+```sql
+USE database_name;
+```
+
+**Example**
+
+Suppose you have a database named "test" and you want to work with the tables and data inside it. You can use the USE statement as follows:
+
+```sql
+
+USE test;
+```
+
+After executing this statement, any SQL queries you run will affect the "test" database. For example:
+
+```sql
+
+SELECT * FROM users;
+```
+
+
+The above query will retrieve all records from the "users" table within the "test" database.
+Verification
+
+To verify that the database selection was successful, you can use the following command:
+
+```sql
+
+SELECT DATABASE();
+```
+
+This will show the name of the currently selected database. If you see the name of the database you intended to use, it means the USE statement worked correctly.
+
+### Drop Database
+
+In MySQL, the `DROP DATABASE` command is used to permanently delete an existing database from the MySQL server. This command will remove all the tables, data, and other objects associated with the specified database. It is important to exercise caution while using the `DROP DATABASE` command, as it is irreversible and can lead to data loss.
+
+#### Syntax
+
+The syntax for dropping a database in MySQL is as follows:
+
+```sql
+DROP DATABASE [IF EXISTS] database_name;
+```
+
+`IF EXISTS` is an optional clause. If specified, it allows the DROP DATABASE command to execute successfully even if the specified database does not exist. If the database does not exist and this clause is not used, MySQL will return an error.
+
+**Caution**
+
+As mentioned earlier, the DROP DATABASE command is irreversible and will delete all data in the specified database. It is crucial to double-check the database name before executing this command to avoid unintended data loss.
+
+## MySQL Data Manipulation
+
+**SELECT**
+
+The SELECT statement is used to retrieve data from one or more tables in the database. It allows you to specify the columns you want to retrieve, apply filtering conditions, and sort the results.
+
+Syntax:
+```sql
+SELECT column1, column2, ... FROM table_name;
+```
+
+**ORDER BY**
+
+The ORDER BY clause is used to sort the result set in ascending or descending order based on one or more columns.
+Syntax:
+```sql
+SELECT column1, column2, ... FROM table_name ORDER BY column1 ASC|DESC, column2 ASC|DESC, ...;
+```
+
+
+**WHERE**
+
+The WHERE clause is used to filter the result set based on specified conditions. It allows you to extract only the rows that meet the specified criteria.
+
+Syntax:
+```sql
+SELECT column1, column2, ... FROM table_name WHERE condition;
+```
+
+**SELECT DISTINCT**
+
+The SELECT DISTINCT statement is used to retrieve unique values from a column.
+Syntax:
+
+```sql
+SELECT DISTINCT column FROM table_name;
+```
+
+**AND**
+
+The AND operator is used to combine multiple conditions in a WHERE clause. It ensures that all conditions must be true for a row to be included in the result set.
+
+Syntax:
+
+```sql
+SELECT column1, column2, ... FROM table_name WHERE condition1 AND condition2 AND ...;
+```
+
+**OR**
+
+The OR operator is used to combine multiple conditions in a WHERE clause. It includes rows in the result set if any of the specified conditions are true.
+
+Syntax:
+
+```sql
+SELECT column1, column2, ... FROM table_name WHERE condition1 OR condition2 OR ...;
+```
+
+
+**IN**
+
+The IN operator is used to check if a value matches any value in a list of specified values. It is often used in the WHERE clause.
+
+Syntax:
+
+```sql
+SELECT column1, column2, ... FROM table_name WHERE column IN (value1, value2, ...);
+```
+
+
+**BETWEEN**
+
+The BETWEEN operator is used to retrieve rows with a value within a specified range, inclusive.
+
+Syntax:
+```sql
+SELECT column1, column2, ... FROM table_name WHERE column BETWEEN value1 AND value2;
+```
+
+**LIKE**
+
+The LIKE operator is used in SQL queries to retrieve rows that match a specific pattern using wildcard characters.
+
+**Syntax**:
+```sql
+SELECT column1, column2, ... FROM table_name WHERE column LIKE 'pattern';
+```
+
+**Explanation**:
+
+column: The name of the column you want to search for the pattern.
+pattern: The pattern you want to match. It can include wildcard characters:
+   % (percentage sign): Represents zero or more characters.
+   _ (underscore): Represents a single character.
+
+When you use the LIKE operator, the database engine will search for rows where the specified column matches the given pattern. The pattern can be used to find partial matches, making it useful for more flexible searches.
+
+```sql
+SELECT * FROM employees WHERE emp_name LIKE 'John%';
+```
+
+This query will return all rows where the "emp_name" starts with "John" and is followed by any number of characters. For instance, it will match "John Doe," "John Smith," and "Johnathan Brown," among others.
