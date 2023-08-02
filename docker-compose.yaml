@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+    db:
+        container_name: bia_database
+        hostname: "bia_database"
+        build:
+            context: .
+            dockerfile: ./docker/db/db.dockerfile
+        command: --innodb-use-native-aio=0
+        restart: always
+        ports:
+            - "3301:3306"
+        volumes:
+            - ./docker/db/dbdata:/var/lib/mysql
+            - ./docker/db:/docker-entrypoint-initdb.d
+        environment:
+            - DB_HOST=bia_database
+            - PORT=3301
+            - DB_USER=root
+            - DB_PASSWORD=root
+            - DB_DATABASE=Bia_teste
