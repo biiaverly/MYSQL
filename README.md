@@ -1,4 +1,4 @@
-# $${\color{greem}Introduction}$$
+# $${\color{green}Introduction}$$
 
 ## 1. What is a Database?
 
