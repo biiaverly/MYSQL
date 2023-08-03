@@ -254,6 +254,7 @@ SELECT DATABASE();
 This will show the name of the currently selected database. If you see the name of the database you intended to use, it means the USE statement worked correctly.
 ## 3. Drop Database
 
+
 In MySQL, the `DROP DATABASE` command is used to permanently delete an existing database from the MySQL server. This command will remove all the tables, data, and other objects associated with the specified database. It is important to exercise caution while using the `DROP DATABASE` command, as it is irreversible and can lead to data loss.
 
 ### Syntax
@@ -270,7 +271,291 @@ DROP DATABASE [IF EXISTS] database_name;
 
 As mentioned earlier, the DROP DATABASE command is irreversible and will delete all data in the specified database. It is crucial to double-check the database name before executing this command to avoid unintended data loss.
 
-# 3. MySQL Data Manipulation
+
+1. Drop the `categories` table from the database.
+
+2. Drop the `books` table from the database.
+
+3. Finally, drop the `bookstore` database.
+
+Complete these tasks using MySQL commands. You can use a MySQL client or command-line interface to execute the SQL commands and perform the tasks.
+
+Have fun practicing MySQL database management!
+## Exercise: Managing Databases
+
+### Task 0 : Migrating the project from Github
+
+1. Clone the project:
+``` git@github.com:biiaverly/MYSQL.git ```
+
+2. Setting up the environment
+``` docker compose up --build -d ```
+
+3. Executing the file
+```docker exec -i bia_database mysql -u root -proot <src/ManagingDb.sql```
+
+### Task 1: Create a Database
+
+1. Create a new database named `bookstore` using the "CREATE DATABASE" command.
+
+### Task 2: Select a Database
+
+1. Use the "USE" statement to select the `bookstore` database.
+
+### Task 3: Drop a Database
+
+1. Drop the `bookstore` database using the "DROP DATABASE" command.
+
+Before executing any of the tasks, make sure to verify the results of each task to ensure that they were performed correctly.
+
+### Verification
+
+To verify the results of each task, use the following commands:
+
+1. To verify Task 1, use the "SHOW DATABASES" command to see a list of all databases, including the `bookstore` database.
+
+2. To verify Task 2, use the "SELECT DATABASE()" command to check if the `bookstore` database is currently selected.
+
+3. To verify Task 3, use the "SHOW DATABASES" command again to confirm that the `bookstore` database has been dropped and is no longer listed.
+
+Remember to use MySQL commands in your queries and verify the results after completing each task. Happy practicing!
+
+# 3. Managing Tables
+## 1. MySQL Storage Engines
+
+In MySQL, a storage engine is a software module that handles the storage, retrieval, and management of data for database tables. MySQL supports multiple storage engines, and each engine has its own set of features, performance characteristics, and capabilities. Depending on your specific use case and requirements, you can choose the most suitable storage engine for your MySQL tables.
+
+Some of the commonly used MySQL storage engines are:
+
+1. **InnoDB**: This is the default storage engine for MySQL since version 5.5. InnoDB supports ACID (Atomicity, Consistency, Isolation, Durability) transactions, row-level locking, and foreign key constraints. It is well-suited for general-purpose applications and is widely used for its reliability and performance.
+
+2. **MyISAM**: Before InnoDB became the default, MyISAM was the default storage engine. It does not support transactions or foreign keys, but it is known for its simplicity and fast read performance. MyISAM is suitable for read-heavy applications with infrequent updates.
+
+3. **Memory (HEAP)**: The Memory storage engine stores data in memory, which makes it extremely fast but volatile. Data is lost when the MySQL server restarts. It is suitable for caching and temporary data storage.
+
+4. **CSV**: The CSV storage engine stores data in comma-separated value files. It is useful for importing and exporting data in CSV format but is not suitable for high-performance or concurrent operations.
+
+5. **Archive**: The Archive storage engine is optimized for write-once, read-many scenarios. It is useful for storing large amounts of historical or archival data efficiently.
+
+6. **NDB (MySQL Cluster)**: The NDB storage engine is designed for use with MySQL Cluster, which provides high availability and data distribution across multiple nodes. It is well-suited for large-scale, mission-critical applications.
+
+To specify a storage engine when creating a table in MySQL, you can use the `ENGINE` keyword. For example:
+
+```sql
+CREATE TABLE my_table (
+  id INT PRIMARY KEY,
+  name VARCHAR(50)
+) ENGINE=InnoDB;
+```
+## 2. Create Tables
+To create a table in MySQL, you can use the `CREATE TABLE` statement. The basic syntax is as follows:
+
+```sql
+CREATE TABLE table_name (
+  column1 data_type1 [constraints],
+  column2 data_type2 [constraints],
+  ...
+);
+
+Example: 
+
+CREATE TABLE employees (
+  id INT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  age INT,
+  department VARCHAR(50),
+  salary DECIMAL(10, 2) DEFAULT 0.00
+);
+
+```
+In this example, we create a table named employees with columns for id, name, age, department, and salary. The id column is the primary key, the name column must have a value (NOT NULL), the age column allows NULL values, the department column is a variable-length string, and the salary column has a default value of 0.00.
+
+You can also add various constraints to enforce data integrity and relationships between tables, such as FOREIGN KEY constraints and UNIQUE constraints.
+## 3. AUTO_INCREMENT
+
+Auto Increment is a feature in MySQL that automatically generates a unique numeric value for a column whenever a new row is inserted into the table. It is commonly used for primary key columns to ensure each row has a unique identifier. The auto-incremented value is automatically managed by the database, saving you the effort of manually assigning unique values.
+
+To enable auto-increment for a column, you need to use the `AUTO_INCREMENT` attribute when defining the column. Typically, you use this attribute in combination with an integer data type such as `INT` or `BIGINT`.
+
+Here's an example of creating a table with an auto-incremented primary key column:
+
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  age INT
+);
+```
+To insert data into the table, you omit the id column, and MySQL will handle it automatically.
+The id column in this INSERT statement does not have a value specified, so MySQL will assign the next available auto-incremented value to it.
+
+Keep in mind that auto-incremented values are unique within the table, but they may have gaps if rows are deleted or if you perform bulk inserts and then rollback the transaction. Additionally, the maximum value an auto-incremented column can reach depends on the data type used (e.g., INT, BIGINT).
+## 4. Rename Tables
+In MySQL, you can rename a table using the `RENAME TABLE` statement. This allows you to change the name of an existing table in the database without altering its structure or data. The basic syntax is as follows:
+
+```sql
+RENAME TABLE old_table_name TO new_table_name;
+```
+It's important to note that when you rename a table, all references to that table within the database (such as foreign key constraints, views, and stored procedures) will also be updated to use the new table name.
+## 5. Alter Tables
+In MySQL, the ALTER TABLE statement is used to modify an existing table's structure. With this statement, you can add, modify, or delete columns, change data types, add or remove indexes, and perform other changes to the table's definition.
+
+The basic syntax for the ALTER TABLE statement is as follows:
+```sql
+ALTER TABLE table_name action;
+```
+**action**: The specific alteration you want to perform, such as adding a column, modifying a column, or dropping a column.
+```sql
+1. Adding a Column:
+
+   ALTER TABLE table_name ADD column_name data_type [constraints];
+   ALTER TABLE contacts ADD phone VARCHAR(15);
+
+2. Modifying a Column:
+
+   ALTER TABLE table_name MODIFY column_name new_data_type [new_constraints];
+   ALTER TABLE employees MODIFY age TINYINT;
+
+4. Dropping a Column:
+
+   ALTER TABLE table_name DROP column_name;
+   ALTER TABLE users DROP email;
+
+5. Adding an Index
+
+   ALTER TABLE table_name ADD INDEX index_name (column1, column2, ...);
+   ALTER TABLE table_name DROP INDEX index_name;
+
+```
+## 6. Drop Tables
+In MySQL, you can delete a table from the database using the DROP TABLE statement. Dropping a table permanently removes it, along with all its data and associated objects (e.g., indexes, triggers, constraints, etc.). Therefore, exercise caution when using this statement, as data loss is irreversible.
+
+The basic syntax for the DROP TABLE statement is as follows:
+```sql
+DROP TABLE table_name;
+```
+Before dropping a table, ensure that you have a backup of the data or that you genuinely want to remove it permanently, as there is no way to recover the data after executing the DROP TABLE statement.
+To prevent accidental table deletion, many database administrators typically perform such operations in test or development environments before executing them in production.
+
+Always double-check the table name and confirm that you have taken all necessary precautions before executing the DROP TABLE statement.
+## 7. Temporary Tables
+
+In MySQL, temporary tables are created to hold temporary data that exists only for the duration of a session. These tables are useful when you need to store and manipulate intermediate results during a session or when you want to break down complex queries into smaller parts for easier processing.
+
+Temporary tables have the following key characteristics:
+
+1. **Session Scope**: Temporary tables are visible only within the session that creates them. When the session ends, the temporary table is automatically dropped, and its data is cleared.
+
+2. **Unique Names**: Temporary tables have unique names within a session. Even if multiple sessions create temporary tables with the same name, they are independent and do not interfere with each other.
+
+3. **Data Persistence**: The data in a temporary table is persisted throughout the session. You can perform various operations on the temporary table, just like with regular tables.
+
+4. **No Transactions**: Temporary tables are not transaction-safe. Any data modifications made to temporary tables are immediately visible to other queries within the same session.
+
+### Creating Temporary Tables
+
+To create a temporary table, you can use the `CREATE TEMPORARY TABLE` statement or the shorthand version `CREATE TEMPORARY TABLE`:
+
+```sql
+CREATE TEMPORARY TABLE temp_table_name (
+  column1 data_type1 [constraints],
+  column2 data_type2 [constraints],
+  ...
+);
+
+Example:
+CREATE TEMPORARY TABLE temp_orders (
+  order_id INT PRIMARY KEY,
+  product_name VARCHAR(100) NOT NULL,
+  quantity INT
+);
+```
+**Using Temporary Tables**
+You can perform various operations on temporary tables, such as inserting data, updating records, or joining them with other tables. Temporary tables behave similarly to regular tables, but they are limited to the session where they were created.
+
+```sql
+CREATE TEMPORARY TABLE temp_orders (
+  order_id INT PRIMARY KEY,
+  product_name VARCHAR(100) NOT NULL,
+  quantity INT
+);
+```
+
+**Dropping Temporary Tables**
+Temporary tables are automatically dropped at the end of the session. However, if you want to explicitly remove a temporary table before the session ends, you can use the DROP TEMPORARY TABLE statement:
+
+```sql
+DROP TEMPORARY TABLE temp_table_name;
+```
+Remember that temporary tables are useful for storing intermediate results or breaking down complex queries. Since they are session-specific and do not persist beyond the session, they are ideal for managing temporary data during a session without affecting the main database structure.
+## 8. Truncate Tables
+In MySQL, the TRUNCATE TABLE statement is used to quickly delete all rows from a table, effectively resetting the table to its original state. Unlike the DELETE statement, which removes rows one by one and logs individual deletions, TRUNCATE TABLE is a faster operation as it removes all rows at once without generating individual row deletion logs. However, it is essential to note that TRUNCATE TABLE is a DDL (Data Definition Language) operation and cannot be rolled back using a transaction.
+
+The basic syntax for the TRUNCATE TABLE statement is as follows:
+```sql 
+TRUNCATE TABLE table_name;
+```
+It's crucial to use TRUNCATE TABLE with caution since it permanently removes all data from the table and cannot be undone. Also, note that TRUNCATE TABLE requires the DELETE privilege on the table.
+
+It's important to understand the differences between TRUNCATE TABLE and DELETE FROM:
+
+TRUNCATE TABLE is faster and more efficient for deleting all rows from a table.
+
+DELETE FROM is more flexible and allows you to specify conditions to delete specific rows, but it can be slower, especially for large tables.
+
+When you want to remove all data from a table and reset its primary key auto-increment value, TRUNCATE TABLE is a good option. However, if you need to selectively delete rows or retain some data, using the DELETE FROM statement with appropriate conditions is a better choice.
+## 9. Generated Columns
+
+In MySQL, a generated column is a virtual column that derives its values based on an expression or formula defined during column creation. The generated column's value is not physically stored in the table but is computed on the fly whenever the column is queried. This feature was introduced in MySQL 5.7. Generated columns provide a convenient way to calculate and display values without the need to store redundant data in the table.
+
+There are two types of generated columns in MySQL:
+
+1. **Stored Generated Columns**: These columns store the computed values in the table. The values are updated automatically whenever the dependent columns change. You can index stored generated columns and use them in various operations.
+
+2. **Virtual Generated Columns**: These columns do not store any data in the table but calculate the value when queried. Virtual generated columns cannot be indexed, but they provide a lightweight way to retrieve computed values without consuming extra storage.
+
+### Creating Generated Columns
+
+To create a generated column, you use the `GENERATED ALWAYS AS` syntax. Here's the basic syntax:
+
+```sql
+CREATE TABLE table_name (
+  column1 data_type GENERATED ALWAYS AS (expression) [VIRTUAL | STORED],
+  ...
+);
+
+Example:
+CREATE TABLE sales (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  quantity INT,
+  price DECIMAL(10, 2),
+  total_price DECIMAL(10, 2) GENERATED ALWAYS AS (quantity * price) STORED
+);
+--In this example, the total_price column is a stored generated column that calculates the total price by multiplying the quantity and price columns.
+```
+
+**Using Generated Columns**
+You can use generated columns in SELECT queries, and their values will be computed on the fly based on the defined expressions. For example:
+```sql
+SELECT id, quantity, price, total_price FROM sales;
+```
+
+**Modifying Generated Columns**
+Once a generated column is created, its expression cannot be altered directly. If you need to change the expression, you must first drop the column and then add it again with the new expression.
+
+**Limitations**
+The expression used for generated columns must be deterministic and cannot reference other generated columns.
+
+Virtual generated columns cannot be indexed, and they cannot have default values or constraints.
+
+The GENERATED ALWAYS clause is required for generated columns. MySQL does not support explicitly specifying values for generated columns during INSERT or UPDATE operations.
+
+Generated columns offer a powerful feature to calculate and display data dynamically without physically storing it in the table, providing more flexibility and efficiency in data handling and representation.
+
+
+
+# 4. MySQL Data Manipulation
 ## 1. Querying Data
 ### SELECT
 
@@ -307,6 +592,7 @@ output:
 
 
 ```
+
 ## 2. Sorting Data
 ### ORDER BY
 
@@ -317,7 +603,6 @@ SELECT column1, column2, ... FROM table_name ORDER BY column1 ASC|DESC, column2 
 ```
 
 ## 3. Filtering data
-
 ### WHERE
 
 The WHERE clause is used to filter the result set based on specified conditions. It allows you to extract only the rows that meet the specified criteria.
@@ -336,7 +621,6 @@ output:
 -----------------
 
 ```
-
 ### SELECT DISTINCT
 
 The SELECT DISTINCT statement is used to retrieve unique values from a column.
@@ -368,7 +652,6 @@ SELECT DISTINCT fruit_name FROM fruits;
 -----------------
 
 ```
-
 ### AND
 
 The AND operator is used to combine multiple conditions in a WHERE clause. It ensures that all conditions must be true for a row to be included in the result set.
@@ -386,7 +669,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 AND emp_name = 'Micha
 -----------------
 
 ```
-
 ### OR
 
 The OR operator is used to combine multiple conditions in a WHERE clause. It includes rows in the result set if any of the specified conditions are true.
@@ -405,8 +687,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 OR emp_name = 'Sarah'
 -----------------
 
 ```
-
-
 ### IN
 
 The IN operator is used to check if a value matches any value in a list of specified values. It is often used in the WHERE clause.
@@ -426,9 +706,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age IN (28, 30, 35);
 -----------------
 
 ```
-
-
-
 ### BETWEEN
 
 The BETWEEN operator is used to retrieve rows with a value within a specified range, inclusive.
@@ -447,7 +724,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age BETWEEN 28 AND 35;
 
 
 ```
-
 ### LIKE
 
 The LIKE operator is used in SQL queries to retrieve rows that match a specific pattern using wildcard characters.
@@ -464,7 +740,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_name LIKE 'J%';
 -----------------
 
 ```
-
 ### NOT IN
 The NOT IN operator in SQL is used to retrieve rows where a specific column's value does not match any of the values specified in the NOT IN list. It is the negation of the IN operator.
 
