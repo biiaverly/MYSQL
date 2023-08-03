@@ -781,7 +781,6 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age NOT IN (28, 30);
 | Michael  | 35      |
 -----------------
 ```
-
 ### LIMIT
 The LIMIT clause in SQL is used to restrict the number of rows returned by a query. It allows you to limit the result set to a specific number of rows, starting from the first row of the result.
 
@@ -827,50 +826,91 @@ SELECT student_id, name FROM students WHERE name IS NULL;
 
 ## 4. Joing Tables
 
-### Aliases
-Table and column aliases are used in SQL to provide temporary or alternative names for tables and columns in a query. They are helpful when you need to simplify the query syntax, create more readable and concise code, or deal with self-joins and subqueries.
+### Table & Column Aliases
+Aliases in MySQL are temporary names assigned to tables or columns in a query. They provide a way to simplify the syntax and improve readability, especially when dealing with complex queries or when joining tables. By using aliases, you can refer to tables and columns with shorter, more meaningful names.
 
 ```sql
-Table :
+SELECT e.name AS employee_name, d.name AS department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.id;
+ ```
 
-SELECT emp_name, emp_age FROM employees AS e;
-
-Column:
-SELECT column_name AS alias_name FROM table_name;
+In this example, e and d are aliases for the employees and departments tables, respectively. The AS keyword is optional, and you can use it to explicitly indicate that a name is an alias.
 
 
-employees table
----------------------------------
-| emp_id | emp_name | emp_age |
----------------------------------
-|  1     | John     | 30      |
-|  2     | Sarah    | 28      |
-|  3     | Michael  | 35      |
----------------------------------
--- Now, let's use a table alias e for the employees table and retrieve the employee names and ages:
+### Joins
+Joins are used to combine rows from different tables based on related columns. The three main types of joins supported in MySQL are:
 
-SELECT e.emp_name, e.emp_age FROM employees AS e;
+**INNER JOIN**
+The `INNER JOIN` is one of the most commonly used joins in MySQL. It allows you to query rows from a table that have matching rows in another table based on a specified condition.
+```sql
+SELECT e.name AS employee_name, d.name AS department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.id;
+ ```
+ In this example, the INNER JOIN is used to combine data from the employees table (e) and the departments table (d) based on the common department_id column. Only the rows with matching department_id values in both tables will be included in the result set.
 
--- In this example, we used the AS keyword to give the employees table an alias e. Throughout the query, we referred to the table as e, so e.emp_name represents the emp_name column from the employees table.
------------------
-| emp_name | emp_age |
------------------
-| John     | 30      |
-| Sarah    | 28      |
-| Michael  | 35      |
------------------
 
--- Now, let's retrieve the employee names along with their ages in months, using a column alias:
+**LEFT JOIN**
+The `LEFT JOIN `returns all rows from the left table and the matching rows from the right table. If no match is found in the right table, NULL values are returned for the right table's columns.
 
-SELECT emp_name AS full_name, emp_age * 12 AS age_in_months FROM employees;
+```sql
+SELECT e.name AS employee_name, d.name AS department_name
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.id;
 
---In this example, we used the AS keyword to give the emp_name column an alias full_name, and we gave the calculation emp_age * 12 an alias age_in_months. The result set displays the column names as full_name and age_in_months.
----------------------------
-| full_name | age_in_months |
----------------------------
-| John      | 360           |
-| Sarah     | 336           |
-| Michael   | 420           |
----------------------------
+ ```
+In this example, the LEFT JOIN is used to retrieve all employees from the employees table (e) along with their respective department names from the departments table (d). If an employee does not have a corresponding department (department_id is NULL), the result will still include that employee's row, but with NULL for the department_name.
 
+**RIGHT JOIN**
+The RIGHT JOIN returns all rows from the right table and the matching rows from the left table. If no match is found in the left table, NULL values are returned for the left table's columns.
+
+
+```sql
+SELECT e.name AS employee_name, d.name AS department_name
+FROM employees e
+RIGHT JOIN departments d ON e.department_id = d.id;
 ```
+
+In this example, the RIGHT JOIN is used to retrieve all departments from the departments table (d) along with the employees assigned to each department from the employees table (e). If a department has no employees (department_id is NULL in the employees table), the result will still include that department's row, but with NULL for the employee_name.
+
+**CROSS JOIN**
+A CROSS JOIN is used to create a Cartesian product of rows from multiple tables. It combines each row from the first table with each row from the second table, resulting in a larger result set.
+
+```sql
+SELECT e.name AS employee_name, d.name AS department_name
+FROM employees e
+CROSS JOIN departments d;
+ ```
+ In this example, the CROSS JOIN combines every row from the employees table (e) with every row from the departments table (d), resulting in all possible combinations of employees and departments.
+
+ **SELF JOIN**
+ A self-join is a special type of join where a table is joined to itself using table aliases. It allows you to connect rows within the same table based on related columns. Self-joins are useful when you need to compare rows or create hierarchical relationships within a table.
+ ```sql
+ SELECT e.name AS employee_name, m.name AS manager_name
+FROM employees e
+INNER JOIN employees m ON e.manager_id = m.id;
+```
+In this example, the employees table is self-joined to retrieve each employee's name along with their respective manager's name. The manager_id column in the employees table is used to establish the relationship between employees and their managers.
+
+## Exercise: Joining Tables in MySQL
+
+In this exercise, you will practice using various types of joins to combine data from multiple tables in MySQL. You will also explore the usage of table and column aliases to improve query readability.
+
+### Instructions:
+
+1. Create the necessary tables to store customer information, order details, and product data.
+
+2. Write SQL queries to retrieve the following information:
+
+      a. Perform an INNER JOIN to get customer names and their orders. This query will combine the 'customers' and 'orders' tables based on the 'customer_id' field, showing customer names and their respective order details.
+
+      b. Perform a LEFT JOIN to get all products and their order details, including products without any orders. This query will display all products from the 'products' table and any matching order details from the 'orders' table. Products without any orders will also be included in the result.
+
+      c. Perform a RIGHT JOIN to get all customers and their orders, including customers without any orders. This query will show all customers from the 'customers' table and any matching order details from the 'orders' table. Customers without any orders will also be included in the result.
+
+      d. Perform a CROSS JOIN to get all possible combinations of customers and products. This query will create a Cartesian product between the 'customers' and 'products' tables, showing all possible combinations of customers and products.
+
+      e. Perform a SELF-JOIN to get customers who share the same address. This query will join the 'customers' table with itself using aliases, connecting rows within the same table based on the 'address' field. It will show customers who have the same address but different IDs.
+
+3. Execute the queries and verify that the results are correct.
