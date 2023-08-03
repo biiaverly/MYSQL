@@ -555,6 +555,31 @@ Generated columns offer a powerful feature to calculate and display data dynamic
 
 
 
+## Example: Setting up Bookstore Database and Managing Books
+
+
+### 1. Database and Table Setup
+
+First, the script creates or drops existing databases and creates a new one named `bookstore`. It then creates a table called `books` with columns `id`, `title`, `author`, `publication_year`, `price`, and `category`. The `id` column is set as the primary key with auto-incrementing values.
+
+### 2. Renaming and Modifying the Table
+
+Next, the script renames the `books` table to `bookstore_books` using the `ALTER TABLE` statement. It also adds a new column named `language` to store the book language after the `price` column, and it modifies the `price` column to make it `NOT NULL`.
+
+### 3. Inserting Book Records
+
+The script inserts four book records into the `bookstore_books` table using `INSERT INTO` statements. The inserted books include "The Great Gatsby," "Harry Potter and the Philosopher's Stone," "A Casa dos Espíritos," and "Cien años de soledad," with their respective details like title, author, publication year, price, language, and category.
+
+### 4. Temporary Table Creation
+
+A temporary table named `temp_books` is created using a `CREATE TEMPORARY TABLE` statement. It stores records from the `bookstore_books` table that have a publication year greater than or equal to 2000.
+
+### 5. Calculated Column
+
+Finally, a new column named `discount` is added to the `bookstore_books` table using the `ALTER TABLE` statement. The `discount` column is a calculated column that stores 10% of the book's price, based on the `price` column's values.
+
+Please ensure that this script is executed in a MySQL environment to create the `bookstore` database and manage book data in the `bookstore_books` table.
+
 # 4. MySQL Data Manipulation
 ## 1. Querying Data
 ### SELECT
