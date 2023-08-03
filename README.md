@@ -55,7 +55,7 @@ A database is a structured collection of data organized using a hierarchical mod
 The structure of a database is determined by the relationship between these components, and the schema provides the blueprint for how data should be stored, organized, and accessed within the database system. Databases can be further categorized into different types based on their models, such as relational databases (like MySQL), NoSQL databases, and more, each with its own specific structure and characteristics.
 
 # $${\color{green}Installation}$$
-## How to Set Up a MySQL Container and Execute a SQL File
+## 1. How to Set Up a MySQL Container and Execute a SQL File
 
 ### Prerequisites
 
@@ -96,7 +96,7 @@ With the MySQL container up and running, you can execute the primeiro.sql file. 
 
 
 
-```docker exec -i bia_database mysql -u root -p root < src/FILE_NAME.sql```
+```docker exec -i bia_database mysql -u root -proot < src/creatingDB.sql```
 
 
 **Check the Database:**
@@ -107,13 +107,13 @@ To verify that the SQL file executed successfully and the data was inserted, acc
 
 # $${\color{green}MYSQL}$$
 
-# Introduction to MySQL
+# 1. Introduction to MySQL
 
-## What is MySQL?
+## 1. What is MySQL?
 
 MySQL is a fast, reliable, and scalable RDBMS that allows you to efficiently store, manage, and retrieve vast amounts of data. It is widely used in various applications, ranging from small web projects to large enterprise-level systems. MySQL is known for its exceptional performance, robustness, and ease of use, making it a top choice for developers and businesses alike.
 
-## Why Use MySQL?
+## 2. Why Use MySQL?
 
 MySQL offers several key advantages that make it stand out among other database management systems:
 
@@ -129,7 +129,7 @@ MySQL offers several key advantages that make it stand out among other database 
 
 - **Robust Security**: MySQL offers strong security features, including encryption, user authentication, and access control, ensuring the protection of your sensitive data.
 
-## How to Install MySQL on Ubuntu
+## 3. How to Install MySQL on Ubuntu
 
 MySQL is a popular open-source Relational Database Management System (RDBMS) used to store and manage data efficiently. This tutorial will guide you through the process of installing MySQL on Ubuntu.
 
@@ -147,21 +147,21 @@ To install the MySQL server, use the following command:
 
 During the installation, you will be prompted to set a password for the MySQL root user. Choose a strong password and remember it, as you will need it later for administrative tasks.
 
-## Step 3: Start and Enable MySQL
+### Step 3: Start and Enable MySQL
 
 Start the MySQL service and enable it to start automatically at system boot:
 
 ```sudo systemctl start mysql``` 
 ```sudo systemctl enable mysql ```
 
-## Step 4: Check MySQL Status
+### Step 4: Check MySQL Status
 
 Verify that MySQL is running:
 ```sudo systemctl status mysql```
 
 If everything is set up correctly, you should see "active (running)" in the output.
 
-## Step 5: Secure MySQL Installation
+### Step 5: Secure MySQL Installation
 
 MySQL comes with a security script to improve the installation's security. Run it with the following command:
 ``` 
@@ -170,7 +170,7 @@ sudo mysql_secure_installation
 
 The script will prompt you to review and improve the MySQL security settings. Follow the on-screen instructions to set a secure password policy, remove anonymous users, disallow root login remotely, and remove the test database.
 
-## Step 6: Access MySQL Shell
+### Step 6: Access MySQL Shell
 
 To access the MySQL shell, use the following command and enter your MySQL root password when prompted:
 
@@ -181,14 +181,12 @@ sudo mysql -u root -p
 You should now be in the MySQL shell, where you can start working with databases and execute SQL queries.
 
 
-## Managing Databases
-
-
-### Create Database
+# 2. Managing Databases
+## 1. Create Database
 
 In MySQL, the "CREATE DATABASE" command is used to create a new database within the MySQL server. A database is a structured collection of data that stores information in tables, columns, and rows. The "CREATE DATABASE" command is essential for setting up a new database where you can store and manage your data efficiently.
 
-#### Syntax
+### Syntax
 
 The syntax for creating a new database in MySQL is as follows:
 
@@ -214,11 +212,11 @@ mysql> show databases;
 +--------------------+
 
 ```
-### Select Database
+## 2. Select Database
 
 In MySQL, the `USE` statement is used to select a specific database within the MySQL server. Once a database is selected using the `USE` statement, any subsequent SQL queries will be executed in the context of that database.
 
-#### Syntax
+### Syntax
 
 The syntax for using the `USE` statement is as follows:
 
@@ -254,12 +252,11 @@ SELECT DATABASE();
 ```
 
 This will show the name of the currently selected database. If you see the name of the database you intended to use, it means the USE statement worked correctly.
-
-### Drop Database
+## 3. Drop Database
 
 In MySQL, the `DROP DATABASE` command is used to permanently delete an existing database from the MySQL server. This command will remove all the tables, data, and other objects associated with the specified database. It is important to exercise caution while using the `DROP DATABASE` command, as it is irreversible and can lead to data loss.
 
-#### Syntax
+### Syntax
 
 The syntax for dropping a database in MySQL is as follows:
 
@@ -273,9 +270,9 @@ DROP DATABASE [IF EXISTS] database_name;
 
 As mentioned earlier, the DROP DATABASE command is irreversible and will delete all data in the specified database. It is crucial to double-check the database name before executing this command to avoid unintended data loss.
 
-## MySQL Data Manipulation
-
-**SELECT**
+# 3. MySQL Data Manipulation
+## 1. Querying Data
+### SELECT
 
 The SELECT statement is used to retrieve data from one or more tables in the database. It allows you to specify the columns you want to retrieve, apply filtering conditions, and sort the results.
 
@@ -284,7 +281,34 @@ Syntax:
 SELECT column1, column2, ... FROM table_name;
 ```
 
-**ORDER BY**
+**Example**
+```sql
+employees table
+---------------------------------
+| emp_id | emp_name | emp_age |
+---------------------------------
+|  1     | John     | 30      |
+|  2     | Sarah    | 28      |
+|  3     | Michael  | 35      |
+---------------------------------
+
+SELECT * FROM employees;
+SELECT emp_name, emp_age FROM employees;
+
+output:
+
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+| Sarah    | 28      |
+| Michael  | 35      |
+-----------------
+
+
+```
+## 2. Sorting Data
+### ORDER BY
 
 The ORDER BY clause is used to sort the result set in ascending or descending order based on one or more columns.
 Syntax:
@@ -292,26 +316,60 @@ Syntax:
 SELECT column1, column2, ... FROM table_name ORDER BY column1 ASC|DESC, column2 ASC|DESC, ...;
 ```
 
+## 3. Filtering data
 
-**WHERE**
+### WHERE
 
 The WHERE clause is used to filter the result set based on specified conditions. It allows you to extract only the rows that meet the specified criteria.
 
 Syntax:
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE condition;
+
+SELECT emp_name, emp_age FROM employees WHERE emp_age > 30;
+
+output:
+-----------------
+| emp_name | emp_age |
+-----------------
+| Michael  | 35      |
+-----------------
+
 ```
 
-**SELECT DISTINCT**
+### SELECT DISTINCT
 
 The SELECT DISTINCT statement is used to retrieve unique values from a column.
 Syntax:
 
 ```sql
 SELECT DISTINCT column FROM table_name;
+
+fruits table
+-----------------
+| fruit_name |
+-----------------
+| Apple      |
+| Banana     |
+| Orange     |
+| Apple      |
+| Mango      |
+-----------------
+
+SELECT DISTINCT fruit_name FROM fruits;
+
+-----------------
+| fruit_name  |
+-----------------
+| Apple       |
+| Banana      |
+| Orange      |
+| Mango       |
+-----------------
+
 ```
 
-**AND**
+### AND
 
 The AND operator is used to combine multiple conditions in a WHERE clause. It ensures that all conditions must be true for a row to be included in the result set.
 
@@ -319,9 +377,17 @@ Syntax:
 
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE condition1 AND condition2 AND ...;
+
+SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 AND emp_name = 'Michael';
+-----------------
+| emp_name | emp_age |
+-----------------
+| Michael  | 35      |
+-----------------
+
 ```
 
-**OR**
+### OR
 
 The OR operator is used to combine multiple conditions in a WHERE clause. It includes rows in the result set if any of the specified conditions are true.
 
@@ -329,10 +395,19 @@ Syntax:
 
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE condition1 OR condition2 OR ...;
+
+SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 OR emp_name = 'Sarah';
+-----------------
+| emp_name | emp_age |
+-----------------
+| Sarah    | 28      |
+| Michael  | 35      |
+-----------------
+
 ```
 
 
-**IN**
+### IN
 
 The IN operator is used to check if a value matches any value in a list of specified values. It is often used in the WHERE clause.
 
@@ -340,38 +415,162 @@ Syntax:
 
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE column IN (value1, value2, ...);
+
+SELECT emp_name, emp_age FROM employees WHERE emp_age IN (28, 30, 35);
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+| Sarah    | 28      |
+| Michael  | 35      |
+-----------------
+
 ```
 
 
-**BETWEEN**
+
+### BETWEEN
 
 The BETWEEN operator is used to retrieve rows with a value within a specified range, inclusive.
 
 Syntax:
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE column BETWEEN value1 AND value2;
+SELECT emp_name, emp_age FROM employees WHERE emp_age BETWEEN 28 AND 35;
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+| Sarah    | 28      |
+| Michael  | 35      |
+-----------------
+
+
 ```
 
-**LIKE**
+### LIKE
 
 The LIKE operator is used in SQL queries to retrieve rows that match a specific pattern using wildcard characters.
 
 **Syntax**:
 ```sql
 SELECT column1, column2, ... FROM table_name WHERE column LIKE 'pattern';
+
+SELECT emp_name, emp_age FROM employees WHERE emp_name LIKE 'J%';
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+-----------------
+
 ```
 
-**Explanation**:
+### NOT IN
+The NOT IN operator in SQL is used to retrieve rows where a specific column's value does not match any of the values specified in the NOT IN list. It is the negation of the IN operator.
 
-column: The name of the column you want to search for the pattern.
-pattern: The pattern you want to match. It can include wildcard characters:
-   % (percentage sign): Represents zero or more characters.
-   _ (underscore): Represents a single character.
+**Syntax**:
+```sql
+SELECT column1, column2, ... FROM table_name WHERE column_name NOT IN (value1, value2, ...);
 
-When you use the LIKE operator, the database engine will search for rows where the specified column matches the given pattern. The pattern can be used to find partial matches, making it useful for more flexible searches.
+SELECT emp_name, emp_age FROM employees WHERE emp_age NOT IN (28, 30);
+
+-----------------
+| emp_name | emp_age |
+-----------------
+| Sarah    | 25      |
+| Michael  | 35      |
+-----------------
+```
+
+### LIMIT
+The LIMIT clause in SQL is used to restrict the number of rows returned by a query. It allows you to limit the result set to a specific number of rows, starting from the first row of the result.
+
+**Syntax**:
+```sql
+SELECT column1, column2, ... FROM table_name LIMIT number_of_rows;
+
+SELECT emp_name, emp_age FROM employees LIMIT 2;
+
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+| Sarah    | 28      |
+-----------------
+```
+
+### IS NULL
+The LIMIT clause in SQL is used to restrict the number of rows returned by a query. It allows you to limit the result set to a specific number of rows, starting from the first row of the result.
+
+**Syntax**:
+```sql
+SELECT column1, column2, ... FROM table_name WHERE column_name IS NULL;
+
+students table
+-----------------------
+| student_id | name   |
+-----------------------
+| 1          | John   |
+| 2          | Sarah  |
+| 3          | NULL   |
+-----------------------
+
+SELECT student_id, name FROM students WHERE name IS NULL;
+
+-----------------------
+| student_id | name   |
+-----------------------
+| 3          | NULL   |
+-----------------------
+
+```
+
+## 4. Joing Tables
+
+### Aliases
+Table and column aliases are used in SQL to provide temporary or alternative names for tables and columns in a query. They are helpful when you need to simplify the query syntax, create more readable and concise code, or deal with self-joins and subqueries.
 
 ```sql
-SELECT * FROM employees WHERE emp_name LIKE 'John%';
-```
+Table :
 
-This query will return all rows where the "emp_name" starts with "John" and is followed by any number of characters. For instance, it will match "John Doe," "John Smith," and "Johnathan Brown," among others.
+SELECT emp_name, emp_age FROM employees AS e;
+
+Column:
+SELECT column_name AS alias_name FROM table_name;
+
+
+employees table
+---------------------------------
+| emp_id | emp_name | emp_age |
+---------------------------------
+|  1     | John     | 30      |
+|  2     | Sarah    | 28      |
+|  3     | Michael  | 35      |
+---------------------------------
+-- Now, let's use a table alias e for the employees table and retrieve the employee names and ages:
+
+SELECT e.emp_name, e.emp_age FROM employees AS e;
+
+-- In this example, we used the AS keyword to give the employees table an alias e. Throughout the query, we referred to the table as e, so e.emp_name represents the emp_name column from the employees table.
+-----------------
+| emp_name | emp_age |
+-----------------
+| John     | 30      |
+| Sarah    | 28      |
+| Michael  | 35      |
+-----------------
+
+-- Now, let's retrieve the employee names along with their ages in months, using a column alias:
+
+SELECT emp_name AS full_name, emp_age * 12 AS age_in_months FROM employees;
+
+--In this example, we used the AS keyword to give the emp_name column an alias full_name, and we gave the calculation emp_age * 12 an alias age_in_months. The result set displays the column names as full_name and age_in_months.
+---------------------------
+| full_name | age_in_months |
+---------------------------
+| John      | 360           |
+| Sarah     | 336           |
+| Michael   | 420           |
+---------------------------
+
+```
