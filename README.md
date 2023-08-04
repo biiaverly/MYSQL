@@ -1,10 +1,13 @@
-# $${\color{green}Introduction}$$
+# <span style="color:darkblue; font-size:50px;">Introduction</span>
 
 ## 1. What is a Database?
+<details> 
 
 A database is a structured collection of data that is organized and managed to provide efficient retrieval and manipulation of information. It serves as a reliable and central repository for storing data in various forms, such as text, numbers, images, and more. Databases are essential components of modern computing, powering a wide range of applications and systems across industries.
+</details> 
 
 ## 2. Importance of Databases
+<details> 
 
 Databases play a crucial role in managing and accessing large volumes of data efficiently. They offer several benefits that make them indispensable for modern applications:
 
@@ -17,8 +20,10 @@ Databases play a crucial role in managing and accessing large volumes of data ef
 - **Data Scalability**: As data volumes grow, databases can scale to handle increasing loads, ensuring optimal performance.
 
 - **Data Retrieval**: Databases support querying and filtering data, enabling quick and precise retrieval of information.
+</details> 
 
 ## 3. Basic Structure of a Database
+<details> 
 
 A database is a structured collection of data organized using a hierarchical model called a Database Schema. It defines the logical and physical structure of the database, including tables, columns, relationships, and constraints. Let's explore the fundamental components of a database structure:
 
@@ -54,13 +59,15 @@ A database is a structured collection of data organized using a hierarchical mod
 
 The structure of a database is determined by the relationship between these components, and the schema provides the blueprint for how data should be stored, organized, and accessed within the database system. Databases can be further categorized into different types based on their models, such as relational databases (like MySQL), NoSQL databases, and more, each with its own specific structure and characteristics.
 
-# $${\color{green}Installation}$$
-## 1. How to Set Up a MySQL Container and Execute a SQL File
+</details> 
 
+# <span style="color:darkblue; font-size:50px;">Installation</span>
+<details> 
+
+## 1. How to Set Up a MySQL Container and Execute a SQL File
 ### Prerequisites
 
 Ensure that Docker is installed on your machine. If you haven't installed it yet, follow the official Docker installation guide for your operating system.
-
 ### Configuration
 
 **Step-by-Step Instructions**
@@ -105,15 +112,19 @@ To verify that the SQL file executed successfully and the data was inserted, acc
 
 ``` docker exec -it bia_database mysql -u root -p ```
 
-# $${\color{green}MYSQL}$$
+</details>
 
-# 1. Introduction to MySQL
+# <span style="color:darkblue; font-size:50px;">MYSQL</span>
+## $${\color{darkblue}\text{\Large Basics}}$$
 
-## 1. What is MySQL?
+## <span style="color:darkblue; font-size:30px;">1 . Introduction to MySQL</span> 
+<details> 
+
+### 1. What is MySQL?
 
 MySQL is a fast, reliable, and scalable RDBMS that allows you to efficiently store, manage, and retrieve vast amounts of data. It is widely used in various applications, ranging from small web projects to large enterprise-level systems. MySQL is known for its exceptional performance, robustness, and ease of use, making it a top choice for developers and businesses alike.
 
-## 2. Why Use MySQL?
+### 2. Why Use MySQL?
 
 MySQL offers several key advantages that make it stand out among other database management systems:
 
@@ -129,17 +140,17 @@ MySQL offers several key advantages that make it stand out among other database 
 
 - **Robust Security**: MySQL offers strong security features, including encryption, user authentication, and access control, ensuring the protection of your sensitive data.
 
-## 3. How to Install MySQL on Ubuntu
+### 3. How to Install MySQL on Ubuntu
 
 MySQL is a popular open-source Relational Database Management System (RDBMS) used to store and manage data efficiently. This tutorial will guide you through the process of installing MySQL on Ubuntu.
 
-### Step 1: Update Package List
+#### Step 1: Update Package List
 
 Open a terminal (Ctrl + Alt + T) and update the package list to ensure you have the latest information about available packages:
 
 ```sudo apt update```
 
-### Step 2: Install MySQL Server
+#### Step 2: Install MySQL Server
 
 To install the MySQL server, use the following command:
 
@@ -147,21 +158,21 @@ To install the MySQL server, use the following command:
 
 During the installation, you will be prompted to set a password for the MySQL root user. Choose a strong password and remember it, as you will need it later for administrative tasks.
 
-### Step 3: Start and Enable MySQL
+#### Step 3: Start and Enable MySQL
 
 Start the MySQL service and enable it to start automatically at system boot:
 
 ```sudo systemctl start mysql``` 
 ```sudo systemctl enable mysql ```
 
-### Step 4: Check MySQL Status
+#### Step 4: Check MySQL Status
 
 Verify that MySQL is running:
 ```sudo systemctl status mysql```
 
 If everything is set up correctly, you should see "active (running)" in the output.
 
-### Step 5: Secure MySQL Installation
+#### Step 5: Secure MySQL Installation
 
 MySQL comes with a security script to improve the installation's security. Run it with the following command:
 ``` 
@@ -170,7 +181,7 @@ sudo mysql_secure_installation
 
 The script will prompt you to review and improve the MySQL security settings. Follow the on-screen instructions to set a secure password policy, remove anonymous users, disallow root login remotely, and remove the test database.
 
-### Step 6: Access MySQL Shell
+#### Step 6: Access MySQL Shell
 
 To access the MySQL shell, use the following command and enter your MySQL root password when prompted:
 
@@ -181,12 +192,32 @@ sudo mysql -u root -p
 You should now be in the MySQL shell, where you can start working with databases and execute SQL queries.
 
 
-# 2. Managing Databases
-## 1. Create Database
+### 4. Data Types in MYSQL
+| Data Type   | Description                                |
+|-------------|--------------------------------------------|
+| BIT         | Small integer value                        |
+| BOOLEAN     | Synonym for TINYINT(1)                     |
+| CHAR        | Fixed-length string                        |
+| DATE        | Date in the 'YYYY-MM-DD' format            |
+| DATETIME    | Date and time in the 'YYYY-MM-DD HH:MM:SS' format |
+| DECIMAL     | Decimal number                            |
+| ENUM        | Set of chosen values                       |
+| INT         | Integer number                            |
+| JSON        | JSON data format                           |
+| TIME        | Time in the 'HH:MM:SS' format             |
+| TIMESTAMP   | Date and time in the 'YYYY-MM-DD HH:MM:SS' format |
+| VARCHAR     | Variable-length string                    |
+
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">2. Managing Databases</span> 
+<details> 
+
+### 1. Create Database
 
 In MySQL, the "CREATE DATABASE" command is used to create a new database within the MySQL server. A database is a structured collection of data that stores information in tables, columns, and rows. The "CREATE DATABASE" command is essential for setting up a new database where you can store and manage your data efficiently.
 
-### Syntax
+#### Syntax
 
 The syntax for creating a new database in MySQL is as follows:
 
@@ -212,11 +243,11 @@ mysql> show databases;
 +--------------------+
 
 ```
-## 2. Select Database
+### 2. Select Database
 
 In MySQL, the `USE` statement is used to select a specific database within the MySQL server. Once a database is selected using the `USE` statement, any subsequent SQL queries will be executed in the context of that database.
 
-### Syntax
+#### Syntax
 
 The syntax for using the `USE` statement is as follows:
 
@@ -252,12 +283,12 @@ SELECT DATABASE();
 ```
 
 This will show the name of the currently selected database. If you see the name of the database you intended to use, it means the USE statement worked correctly.
-## 3. Drop Database
+### 3. Drop Database
 
 
 In MySQL, the `DROP DATABASE` command is used to permanently delete an existing database from the MySQL server. This command will remove all the tables, data, and other objects associated with the specified database. It is important to exercise caution while using the `DROP DATABASE` command, as it is irreversible and can lead to data loss.
 
-### Syntax
+#### Syntax
 
 The syntax for dropping a database in MySQL is as follows:
 
@@ -281,9 +312,9 @@ As mentioned earlier, the DROP DATABASE command is irreversible and will delete 
 Complete these tasks using MySQL commands. You can use a MySQL client or command-line interface to execute the SQL commands and perform the tasks.
 
 Have fun practicing MySQL database management!
-## Exercise: Managing Databases
+### Exercise: Managing Databases
 
-### Task 0 : Migrating the project from Github
+#### Task 0 : Migrating the project from Github
 
 1. Clone the project:
 ``` git@github.com:biiaverly/MYSQL.git ```
@@ -294,21 +325,21 @@ Have fun practicing MySQL database management!
 3. Executing the file
 ```docker exec -i bia_database mysql -u root -proot <src/ManagingDb.sql```
 
-### Task 1: Create a Database
+#### Task 1: Create a Database
 
 1. Create a new database named `bookstore` using the "CREATE DATABASE" command.
 
-### Task 2: Select a Database
+#### Task 2: Select a Database
 
 1. Use the "USE" statement to select the `bookstore` database.
 
-### Task 3: Drop a Database
+#### Task 3: Drop a Database
 
 1. Drop the `bookstore` database using the "DROP DATABASE" command.
 
 Before executing any of the tasks, make sure to verify the results of each task to ensure that they were performed correctly.
 
-### Verification
+#### Verification
 
 To verify the results of each task, use the following commands:
 
@@ -319,9 +350,12 @@ To verify the results of each task, use the following commands:
 3. To verify Task 3, use the "SHOW DATABASES" command again to confirm that the `bookstore` database has been dropped and is no longer listed.
 
 Remember to use MySQL commands in your queries and verify the results after completing each task. Happy practicing!
+</details> 
 
-# 3. Managing Tables
-## 1. MySQL Storage Engines
+## <span style="color:darkblue; font-size:30px;">3. Managing Tables</span> 
+<details> 
+
+### 1. MySQL Storage Engines
 
 In MySQL, a storage engine is a software module that handles the storage, retrieval, and management of data for database tables. MySQL supports multiple storage engines, and each engine has its own set of features, performance characteristics, and capabilities. Depending on your specific use case and requirements, you can choose the most suitable storage engine for your MySQL tables.
 
@@ -347,7 +381,7 @@ CREATE TABLE my_table (
   name VARCHAR(50)
 ) ENGINE=InnoDB;
 ```
-## 2. Create Tables
+### 2. Create Tables
 To create a table in MySQL, you can use the `CREATE TABLE` statement. The basic syntax is as follows:
 
 ```sql
@@ -371,7 +405,7 @@ CREATE TABLE employees (
 In this example, we create a table named employees with columns for id, name, age, department, and salary. The id column is the primary key, the name column must have a value (NOT NULL), the age column allows NULL values, the department column is a variable-length string, and the salary column has a default value of 0.00.
 
 You can also add various constraints to enforce data integrity and relationships between tables, such as FOREIGN KEY constraints and UNIQUE constraints.
-## 3. AUTO_INCREMENT
+### 3. AUTO_INCREMENT
 
 Auto Increment is a feature in MySQL that automatically generates a unique numeric value for a column whenever a new row is inserted into the table. It is commonly used for primary key columns to ensure each row has a unique identifier. The auto-incremented value is automatically managed by the database, saving you the effort of manually assigning unique values.
 
@@ -391,14 +425,14 @@ To insert data into the table, you omit the id column, and MySQL will handle it 
 The id column in this INSERT statement does not have a value specified, so MySQL will assign the next available auto-incremented value to it.
 
 Keep in mind that auto-incremented values are unique within the table, but they may have gaps if rows are deleted or if you perform bulk inserts and then rollback the transaction. Additionally, the maximum value an auto-incremented column can reach depends on the data type used (e.g., INT, BIGINT).
-## 4. Rename Tables
+### 4. Rename Tables
 In MySQL, you can rename a table using the `RENAME TABLE` statement. This allows you to change the name of an existing table in the database without altering its structure or data. The basic syntax is as follows:
 
 ```sql
 RENAME TABLE old_table_name TO new_table_name;
 ```
 It's important to note that when you rename a table, all references to that table within the database (such as foreign key constraints, views, and stored procedures) will also be updated to use the new table name.
-## 5. Alter Tables
+### 5. Alter Tables
 In MySQL, the ALTER TABLE statement is used to modify an existing table's structure. With this statement, you can add, modify, or delete columns, change data types, add or remove indexes, and perform other changes to the table's definition.
 
 The basic syntax for the ALTER TABLE statement is as follows:
@@ -428,7 +462,7 @@ ALTER TABLE table_name action;
    ALTER TABLE table_name DROP INDEX index_name;
 
 ```
-## 6. Drop Tables
+### 6. Drop Tables
 In MySQL, you can delete a table from the database using the DROP TABLE statement. Dropping a table permanently removes it, along with all its data and associated objects (e.g., indexes, triggers, constraints, etc.). Therefore, exercise caution when using this statement, as data loss is irreversible.
 
 The basic syntax for the DROP TABLE statement is as follows:
@@ -439,7 +473,7 @@ Before dropping a table, ensure that you have a backup of the data or that you g
 To prevent accidental table deletion, many database administrators typically perform such operations in test or development environments before executing them in production.
 
 Always double-check the table name and confirm that you have taken all necessary precautions before executing the DROP TABLE statement.
-## 7. Temporary Tables
+### 7. Temporary Tables
 
 In MySQL, temporary tables are created to hold temporary data that exists only for the duration of a session. These tables are useful when you need to store and manipulate intermediate results during a session or when you want to break down complex queries into smaller parts for easier processing.
 
@@ -453,7 +487,7 @@ Temporary tables have the following key characteristics:
 
 4. **No Transactions**: Temporary tables are not transaction-safe. Any data modifications made to temporary tables are immediately visible to other queries within the same session.
 
-### Creating Temporary Tables
+#### Creating Temporary Tables
 
 To create a temporary table, you can use the `CREATE TEMPORARY TABLE` statement or the shorthand version `CREATE TEMPORARY TABLE`:
 
@@ -489,7 +523,7 @@ Temporary tables are automatically dropped at the end of the session. However, i
 DROP TEMPORARY TABLE temp_table_name;
 ```
 Remember that temporary tables are useful for storing intermediate results or breaking down complex queries. Since they are session-specific and do not persist beyond the session, they are ideal for managing temporary data during a session without affecting the main database structure.
-## 8. Truncate Tables
+### 8. Truncate Tables
 In MySQL, the TRUNCATE TABLE statement is used to quickly delete all rows from a table, effectively resetting the table to its original state. Unlike the DELETE statement, which removes rows one by one and logs individual deletions, TRUNCATE TABLE is a faster operation as it removes all rows at once without generating individual row deletion logs. However, it is essential to note that TRUNCATE TABLE is a DDL (Data Definition Language) operation and cannot be rolled back using a transaction.
 
 The basic syntax for the TRUNCATE TABLE statement is as follows:
@@ -505,7 +539,7 @@ TRUNCATE TABLE is faster and more efficient for deleting all rows from a table.
 DELETE FROM is more flexible and allows you to specify conditions to delete specific rows, but it can be slower, especially for large tables.
 
 When you want to remove all data from a table and reset its primary key auto-increment value, TRUNCATE TABLE is a good option. However, if you need to selectively delete rows or retain some data, using the DELETE FROM statement with appropriate conditions is a better choice.
-## 9. Generated Columns
+### 9. Generated Columns
 
 In MySQL, a generated column is a virtual column that derives its values based on an expression or formula defined during column creation. The generated column's value is not physically stored in the table but is computed on the fly whenever the column is queried. This feature was introduced in MySQL 5.7. Generated columns provide a convenient way to calculate and display values without the need to store redundant data in the table.
 
@@ -515,7 +549,7 @@ There are two types of generated columns in MySQL:
 
 2. **Virtual Generated Columns**: These columns do not store any data in the table but calculate the value when queried. Virtual generated columns cannot be indexed, but they provide a lightweight way to retrieve computed values without consuming extra storage.
 
-### Creating Generated Columns
+#### Creating Generated Columns
 
 To create a generated column, you use the `GENERATED ALWAYS AS` syntax. Here's the basic syntax:
 
@@ -552,37 +586,32 @@ Virtual generated columns cannot be indexed, and they cannot have default values
 The GENERATED ALWAYS clause is required for generated columns. MySQL does not support explicitly specifying values for generated columns during INSERT or UPDATE operations.
 
 Generated columns offer a powerful feature to calculate and display data dynamically without physically storing it in the table, providing more flexibility and efficiency in data handling and representation.
-
-
-
-## Example: Setting up Bookstore Database and Managing Books
-
-
-### 1. Database and Table Setup
+### Exercise: Setting up Bookstore Database and Managing Books
+#### 1. Database and Table Setup
 
 First, the script creates or drops existing databases and creates a new one named `bookstore`. It then creates a table called `books` with columns `id`, `title`, `author`, `publication_year`, `price`, and `category`. The `id` column is set as the primary key with auto-incrementing values.
-
-### 2. Renaming and Modifying the Table
+#### 2. Renaming and Modifying the Table
 
 Next, the script renames the `books` table to `bookstore_books` using the `ALTER TABLE` statement. It also adds a new column named `language` to store the book language after the `price` column, and it modifies the `price` column to make it `NOT NULL`.
-
-### 3. Inserting Book Records
+#### 3. Inserting Book Records
 
 The script inserts four book records into the `bookstore_books` table using `INSERT INTO` statements. The inserted books include "The Great Gatsby," "Harry Potter and the Philosopher's Stone," "A Casa dos Espíritos," and "Cien años de soledad," with their respective details like title, author, publication year, price, language, and category.
-
-### 4. Temporary Table Creation
+#### 4. Temporary Table Creation
 
 A temporary table named `temp_books` is created using a `CREATE TEMPORARY TABLE` statement. It stores records from the `bookstore_books` table that have a publication year greater than or equal to 2000.
-
-### 5. Calculated Column
+#### 5. Calculated Column
 
 Finally, a new column named `discount` is added to the `bookstore_books` table using the `ALTER TABLE` statement. The `discount` column is a calculated column that stores 10% of the book's price, based on the `price` column's values.
 
 Please ensure that this script is executed in a MySQL environment to create the `bookstore` database and manage book data in the `bookstore_books` table.
 
-# 4. MySQL Data Manipulation
-## 1. Querying Data
-### SELECT
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">4. Data Manipulation</span> 
+<details> 
+
+### 1. Querying Data
+#### SELECT
 
 The SELECT statement is used to retrieve data from one or more tables in the database. It allows you to specify the columns you want to retrieve, apply filtering conditions, and sort the results.
 
@@ -618,8 +647,8 @@ output:
 
 ```
 
-## 2. Sorting Data
-### ORDER BY
+### 2. Sorting Data
+#### ORDER BY
 
 The ORDER BY clause is used to sort the result set in ascending or descending order based on one or more columns.
 Syntax:
@@ -627,8 +656,8 @@ Syntax:
 SELECT column1, column2, ... FROM table_name ORDER BY column1 ASC|DESC, column2 ASC|DESC, ...;
 ```
 
-## 3. Filtering data
-### WHERE
+### 3. Filtering data
+#### WHERE
 
 The WHERE clause is used to filter the result set based on specified conditions. It allows you to extract only the rows that meet the specified criteria.
 
@@ -646,7 +675,7 @@ output:
 -----------------
 
 ```
-### SELECT DISTINCT
+#### SELECT DISTINCT
 
 The SELECT DISTINCT statement is used to retrieve unique values from a column.
 Syntax:
@@ -677,7 +706,7 @@ SELECT DISTINCT fruit_name FROM fruits;
 -----------------
 
 ```
-### AND
+#### AND
 
 The AND operator is used to combine multiple conditions in a WHERE clause. It ensures that all conditions must be true for a row to be included in the result set.
 
@@ -694,7 +723,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 AND emp_name = 'Micha
 -----------------
 
 ```
-### OR
+#### OR
 
 The OR operator is used to combine multiple conditions in a WHERE clause. It includes rows in the result set if any of the specified conditions are true.
 
@@ -712,7 +741,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age > 30 OR emp_name = 'Sarah'
 -----------------
 
 ```
-### IN
+#### IN
 
 The IN operator is used to check if a value matches any value in a list of specified values. It is often used in the WHERE clause.
 
@@ -731,7 +760,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age IN (28, 30, 35);
 -----------------
 
 ```
-### BETWEEN
+#### BETWEEN
 
 The BETWEEN operator is used to retrieve rows with a value within a specified range, inclusive.
 
@@ -749,7 +778,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age BETWEEN 28 AND 35;
 
 
 ```
-### LIKE
+#### LIKE
 
 The LIKE operator is used in SQL queries to retrieve rows that match a specific pattern using wildcard characters.
 
@@ -765,7 +794,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_name LIKE 'J%';
 -----------------
 
 ```
-### NOT IN
+#### NOT IN
 The NOT IN operator in SQL is used to retrieve rows where a specific column's value does not match any of the values specified in the NOT IN list. It is the negation of the IN operator.
 
 **Syntax**:
@@ -781,7 +810,7 @@ SELECT emp_name, emp_age FROM employees WHERE emp_age NOT IN (28, 30);
 | Michael  | 35      |
 -----------------
 ```
-### LIMIT
+#### LIMIT
 The LIMIT clause in SQL is used to restrict the number of rows returned by a query. It allows you to limit the result set to a specific number of rows, starting from the first row of the result.
 
 **Syntax**:
@@ -797,8 +826,7 @@ SELECT emp_name, emp_age FROM employees LIMIT 2;
 | Sarah    | 28      |
 -----------------
 ```
-
-### IS NULL
+#### IS NULL
 The LIMIT clause in SQL is used to restrict the number of rows returned by a query. It allows you to limit the result set to a specific number of rows, starting from the first row of the result.
 
 **Syntax**:
@@ -823,10 +851,57 @@ SELECT student_id, name FROM students WHERE name IS NULL;
 -----------------------
 
 ```
+#### Exercise 
 
-## 4. Joing Tables
+**Question:** 
 
-### Table & Column Aliases
+<details>
+
+Consider a database with the following data inserted into the `departments` and `employees` tables:
+
+<summary><strong>Scenario:</strong></summary>
+
+```sql
+INSERT INTO departments (name)
+VALUES
+  ('HR'),
+  ('IT'),
+  ('Finance'),
+  ('Marketing');
+
+INSERT INTO employees (name, department, salary)
+VALUES
+  ('John Smith', 'HR', 55000),
+  ('Alice Johnson', 'IT', 65000),
+  ('Bob Williams', 'Finance', 60000),
+  ('Mary Brown', 'HR', 52000);
+  ```
+
+</details>
+
+
+1. Retrieve all employees:
+
+2. Sort employees in ascending order:
+
+3. Select all employees who work in the HR department:
+
+4. Retrieve all existing departments:
+
+5. Select all employees who work in the HR department and have a salary over 50000:
+
+6. Select all employees who have worked in either the HR or IT departments:
+
+7. Select all employees who have worked in the HR or IT departments using the IN operator:
+
+8. Retrieve all employees with a salary between 4000 and 6000:
+
+9. Select all employees with "John" in their name:
+
+
+
+### 4. Joing Tables
+#### Table & Column Aliases
 Aliases in MySQL are temporary names assigned to tables or columns in a query. They provide a way to simplify the syntax and improve readability, especially when dealing with complex queries or when joining tables. By using aliases, you can refer to tables and columns with shorter, more meaningful names.
 
 ```sql
@@ -836,9 +911,7 @@ INNER JOIN departments d ON e.department_id = d.id;
  ```
 
 In this example, e and d are aliases for the employees and departments tables, respectively. The AS keyword is optional, and you can use it to explicitly indicate that a name is an alias.
-
-
-### Joins
+#### Joins
 Joins are used to combine rows from different tables based on related columns. The three main types of joins supported in MySQL are:
 
 **INNER JOIN**
@@ -892,12 +965,9 @@ FROM employees e
 INNER JOIN employees m ON e.manager_id = m.id;
 ```
 In this example, the employees table is self-joined to retrieve each employee's name along with their respective manager's name. The manager_id column in the employees table is used to establish the relationship between employees and their managers.
-
-## Exercise: Joining Tables in MySQL
+#### Exercise: Joining Tables in MySQL
 
 In this exercise, you will practice using various types of joins to combine data from multiple tables in MySQL. You will also explore the usage of table and column aliases to improve query readability.
-
-### Instructions:
 
 1. Create the necessary tables to store customer information, order details, and product data.
 
@@ -914,3 +984,159 @@ In this exercise, you will practice using various types of joins to combine data
       e. Perform a SELF-JOIN to get customers who share the same address. This query will join the 'customers' table with itself using aliases, connecting rows within the same table based on the 'address' field. It will show customers who have the same address but different IDs.
 
 3. Execute the queries and verify that the results are correct.
+
+</details> 
+
+
+
+## $${\color{darkblue}\text{\Large MySQL Stored Procedures}}$$
+
+## <span style="color:darkblue; font-size:30px;">1. Stored procedure basics</span> 
+<details>
+
+#### Introduction to SQL Stored Procedures
+
+Stored procedures are blocks of code that can be executed in a database. They allow you to encapsulate SQL logic and business rules on the database server. Stored procedures are beneficial for code reusability, performance enhancement, and security.
+
+#### Advantages of Stored Procedures:
+
+- **Modularity:** Stored procedures allow you to break complex tasks into smaller, reusable parts.
+- **Performance:** By reducing round-trip communication, stored procedures can improve execution speed.
+- **Security:** You can grant permissions on procedures, hiding underlying table details.
+#### Changing MySQL Delimiter
+
+When working with stored procedures, you need to change the delimiter to something other than the semicolon (;) to prevent conflicts with semicolons used within the procedure code. Changing the delimiter ensures that MySQL doesn't interpret the semicolons in the procedure code as the end of the statement.
+
+```sql
+DELIMITER //
+
+-- Example stored procedure
+CREATE PROCEDURE MyProcedure()
+BEGIN
+    -- Procedure logic here
+END;
+//
+
+DELIMITER ;
+
+ ```
+#### Creating Stored Procedures:
+To create a stored procedure in MySQL, you use the CREATE PROCEDURE statement. This statement allows you to define the name of the procedure, input parameters, and the SQL code that makes up the procedure's logic. Stored procedures can accept parameters, execute SQL statements, and return results.
+
+```sql
+DELIMITER //
+
+-- Example stored procedure with parameter
+CREATE PROCEDURE GetEmployeeByDepartment(IN deptName VARCHAR(50))
+BEGIN
+    SELECT * FROM employees WHERE department = deptName;
+END;
+//
+
+DELIMITER ;
+ ```
+#### Removing Stored Procedures:
+If you no longer need a stored procedure, you can use the DROP PROCEDURE statement to remove it from the database. This ensures that the stored procedure and its associated logic are no longer available for execution.
+
+```sql
+-- Example to remove a stored procedure
+DROP PROCEDURE MyProcedure;
+
+ ```
+#### Modifying Stored Procedures:
+You can modify an existing stored procedure using the ALTER PROCEDURE statement. This allows you to change the procedure's logic, parameters, and other attributes. Modifying a stored procedure is useful when you need to update its functionality without recreating it from scratch.
+
+```sql
+-- Example to modify a stored procedure
+DELIMITER //
+
+ALTER PROCEDURE GetEmployeeByDepartment(IN newDeptName VARCHAR(50))
+BEGIN
+    SELECT * FROM employees WHERE department = newDeptName;
+END;
+//
+
+DELIMITER ;
+
+ ```
+#### Listing Stored Procedures:
+You can list the stored procedures in a MySQL database using the SHOW PROCEDURE STATUS statement:
+```sql
+SHOW PROCEDURE STATUS;
+```
+This statement will provide information about the stored procedures in the current database, including their names, types, and creation/modification timestamps
+
+#### Variables
+Variables are used to store temporary data within a stored procedure. They can be declared and assigned values for use in the procedure's logic:
+```sql
+DELIMITER //
+
+CREATE PROCEDURE CalculateTotalSalary()
+BEGIN
+    DECLARE total DECIMAL(10, 2);
+    
+    SELECT SUM(salary) INTO total
+    FROM employees;
+    
+    SELECT total;
+END;
+//
+
+DELIMITER ;
+ ```
+ In this example, the total variable is declared and assigned the sum of all employee salaries.
+
+
+#### Parameters
+Parameters allow you to pass values to a stored procedure when calling it. They provide dynamic behavior for the procedure:
+
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE GetEmployeeBySalaryRange(IN minSalary DECIMAL(10, 2), IN maxSalary DECIMAL(10, 2))
+BEGIN
+    SELECT * FROM employees WHERE salary BETWEEN minSalary AND maxSalary;
+END;
+//
+
+DELIMITER ;
+
+ ```
+ In this example, the stored procedure accepts two input parameters (minSalary and maxSalary) to retrieve employees within a specified salary range.
+ 
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">2. Conditional Statements</span> 
+
+<details>
+
+
+
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">3. Loops</span> 
+<details>
+
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">4. Error Handling</span> 
+<details>
+
+</details> 
+
+
+## <span style="color:darkblue; font-size:30px;">5. Loops</span> 
+<details>
+
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">6. Stored Functions</span> 
+<details>
+
+</details> 
+
+## <span style="color:darkblue; font-size:30px;">7. Stored Program Security</span> 
+<details>
+
+</details> 
